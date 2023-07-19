@@ -8,7 +8,8 @@ This implementation can achieve the performance of **57.4% mAP** and  **71.8% Co
 > Yufei Yin, Jiajun Deng, Li Li, Wengang Zhou, and Houqiang Li.
 
 
-![1](pics/framework.png){:height="50%" width="50%"}
+![1](pics/framework.png)
+<img src="pics/framework.png" width = "300" height = "200" alt="framework" align=center />
 
 The code will be released soon.
 
