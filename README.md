@@ -8,7 +8,7 @@ This implementation can achieve the performance of **57.4% mAP** and  **71.8% Co
 > Yufei Yin, Jiajun Deng, Li Li, Wengang Zhou, and Houqiang Li.
 
 
-![1](pics/framework.pdf)
+![1](pics/framework.png)
 
 The code will be released soon.
 
