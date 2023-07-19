@@ -7,8 +7,6 @@ This implementation can achieve the performance of **57.4% mAP** and  **71.8% Co
 > **Cyclic-Bootstrap Labeling for Weakly Supervised Object Detection  (ICCV)** \
 > Yufei Yin, Jiajun Deng, Li Li, Wengang Zhou, and Houqiang Li.
 
-
-![1](pics/framework.png)
 <img src="pics/framework.png" width = "827" height = "595" alt="framework" align=center />
 
 The code will be released soon.
