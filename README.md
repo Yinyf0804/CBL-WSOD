@@ -9,5 +9,5 @@ This implementation can achieve the performance of **57.4% mAP** and  **71.8% Co
 
 <img src="pics/framework.png" width = "827" height = "595" alt="framework" align=center />
 
-The code will be released soon.
+**The code will be released soon.**
 
