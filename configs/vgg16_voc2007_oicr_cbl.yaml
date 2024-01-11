@@ -1,0 +1,75 @@
+MODEL:
+  TYPE: generalized_rcnn
+  CONV_BODY: vgg16.dilated_conv5_body
+  METHOD: oicr_mt
+NUM_GPUS: 2
+VGG:
+  IMAGENET_PRETRAINED_WEIGHTS: '/gdata1/yinyf/pcl_others/pretrained_model/vgg16_caffe.pth'
+SOLVER:
+  WEIGHT_DECAY: 0.0005
+  LR_POLICY: steps_with_decay
+  BASE_LR: 0.001
+  GAMMA: 0.1
+  # 1x schedule (note TRAIN.IMS_PER_BATCH: 1)
+  MAX_ITER: 70000
+  STEPS: [0, 50000]
+FAST_RCNN:
+  ROI_BOX_HEAD: vgg16.roi_2mlp_head
+  ROI_XFORM_METHOD: RoIPoolF
+  ROI_XFORM_RESOLUTION: 7
+  MLP_HEAD_DIM: 4096
+TRAIN:
+  SCALES: (480, 576, 688, 864, 1000, 1200)
+  MAX_SIZE: 2000
+  IMS_PER_BATCH: 1
+  BATCH_SIZE_PER_IM: 4096
+  PROPOSAL_FILES: ('/gdata1/yinyf/pcl_others/selective_search_data/voc_2007_trainval.pkl',)
+  # PROPOSAL_FILES: ('/ghome/yinyf/pcl/data/mcg/voc_2007_trainval.pkl',)
+  BG_THRESH: 0.1
+  SNAPSHOT_ITERS: 100000
+  SAVE_ITERS: (20000, 30000, 32000)
+TEST:
+  SCALE: 480
+  MAX_SIZE: 2000
+  NMS: 0.4
+  SCORE_THRESH: 0.0
+  PROPOSAL_FILES: ('/gdata1/yinyf/pcl_others/selective_search_data',)
+  # PROPOSAL_FILES: ('/ghome/yinyf/pcl/data/mcg',) 
+  BBOX_AUG:
+    ENABLED: True
+    H_FLIP: True
+    SCALES: (576, 688, 864, 1000, 1200)
+    SCALE_H_FLIP: True
+    SCORE_HEUR: 'AVG'
+    COORD_HEUR: 'AVG'
+OICR:
+  Need_Reg: True
+  Use_Reg_Lastbranch: True
+  Test_Need_Regcls: True
+  CBL:
+    LOSSWEIGHT: "linear"
+    MeanTeacher_ALL: True
+    MeanTeacher_ALPHA: 0.999
+    MeanTeacher_UPDATE: "multi"
+    MeanTeacher_UPDATE_MULTI: "refine_avg_cls"
+    IoUThresh: "linear"
+    IoUThresh_IgnBG: True
+    Test_UseMTMean: True
+    RCNN_UseMTlayer: True
+    RCNN_UseMTlayer_STARTITER: 0.4
+    RCNN_UseMTlayer_MULTIGT: True
+    TOPK_SELECT_RATIO: 0.05
+    TOPK_SCORE_THS_RATIO: 0.7
+    RCNN_UseMTlayer_BRANCH: "last2-ens_rev"
+    RCNN_UseMTlayer_IOUTHS: 0.5
+    RCNN_UseMTlayer_TYPE: "filter"
+    RCNN_UseMTlayer_SELECTBRANCH: 0
+    RCNN_UseMTlayer_FILTER_NONMS: True
+    RCNN_UseMTlayer_SCORE_GAMMA: 0.4
+    RCNN_UseMTlayer_SCORE_ENSTYPE: "add_lin"
+    RCNN_UseMTlayer_SCORE_ADDLIN_VALUE: 1.0
+    EXTRA_ITER: 80000
+# RNG_SEED: 9
+DATA_DIR: "/gdata/yinyf"
+CACHE_PATH: "/ghome/yangyc/wsddn/data"
+OUTPUT_DIR: "/gdata1/yangyc/wsddn/output/oicr_cbl"
